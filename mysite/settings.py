@@ -123,5 +123,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = '/home/sharon/mysite/mysite/news/media/'
+MEDIA_ROOT = '/home/sharon/mysite/news/media'
 MEDIA_URL = '/news/media/'
