@@ -25,8 +25,8 @@ def index(request):
 def article(request, article_id):
     template_name = 'news/article.html'
     arti = get_object_or_404(Article, pk=article_id)
-    image = ArticleImages.objects.get(article=arti.id)
+    #image = ArticleImages.objects.get(article=arti.id)
     arti.views += 1
     arti.save()
-    context = {'article': arti, 'image': image}
+    context = {'article': arti, 'image': "none"}
     return render(request, template_name, context)
