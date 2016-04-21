@@ -20,12 +20,11 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^news/', include('news.urls')),
     url(r'^tweepy/', include('tweepytest.urls')),
 ]
-
 
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
