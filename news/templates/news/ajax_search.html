@@ -1,0 +1,11 @@
+{% if news.count > 0 %}
+
+{% for new in news %}
+    <a href="/news/article/{{ new.id }}/">{{ new.name }}</a><br/>
+    <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {{ new.date }}<br><span class="glyphicon glyphicon-user"></span> {{ new.writer }}</p>
+{% endfor %}
+
+{% else %}
+</br><span class="label label-info">There were no matches</span>
+
+{% endif %}
