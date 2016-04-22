@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My test Django website</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</head>
-<body>
-<h1>{{ q.question_text }}</h1>
+{% include "head.html" %}
+
+{% include "navbody.html" with app="polls" admin=user.is_superuser %}
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3>{{ question.question_text }}</h3>
+    </div>
+
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
-<form action="{% url 'polls:vote' q.id %}" method="post">
+<table border="0" style="margin-left: 15px"><tr><td>
+<form action="{% url 'polls:vote' question.id %}" method="post">
 {% csrf_token %}
-{% for choice in q.choice_set.all %}
-    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
-    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% for choice in question.choice_set.all %}
+    <label for="choice{{ forloop.counter }}"><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    {{ choice.choice_text }}</label><br />
 {% endfor %}
-<input type="submit" value="Vote" />
+<input type="submit" class="btn btn-success" value="Vote" />
 </form>
-</ul>
-</body>
-</html>
+</td></tr></table>
+</div>
+{% include "footer.html" %}

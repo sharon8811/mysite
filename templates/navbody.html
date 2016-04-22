@@ -1,0 +1,25 @@
+</head>
+
+<body>
+<div class="container">
+
+    <div class="jumbotron" style="text-align: center;">
+        <H1>Python Django website</H1>
+    </div>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Python Django website</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li {% if app == "home" %} class="active"{% endif %}><a href="/">Home <span class="glyphicon glyphicon-home"></span></a></li>
+      <li {% if app == "polls" %} class="active"{% endif %}><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
+      <li {% if app == "news" %} class="active"{% endif %}><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
+      <li {% if app == "formapp" %} class="active"{% endif %}><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
+      {% if admin %}
+        <li><a href="/admin/">admin</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

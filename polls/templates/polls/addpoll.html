@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form role="form" method="POST" action="/polls/addpoll/">
+    {% csrf_token %}
+    {{ f }}<br/>
+    {% for form in fs %}
+        {{ form.id }}
+            <label>Otion text:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> {{ form.choice_text }}<br/>
+            <label>Number of votes:</label> {{ form.votes }}
+        <br/><br/>
+    {% endfor %}
+    <!--{{ fs }}-->
+    <input type="submit" value="add poll">
+</form>
+
+</body>
+</html>

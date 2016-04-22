@@ -1,20 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>My test Django website</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-</head>
-<body>
-{% if ql %}
+{% include "head.html" %}
+
+{% include "navbody.html" with app="polls" admin=user.is_superuser %}
+
+<div class="row">
+        <div class="col-sm-12">
+        <h3>List of available polls:</h3>
+        {% if msg != "" %}
+            <strong style="color: green;">{{ msg }}</strong>
+        {% endif %}
+{% if latest_question_list %}
     <ul>
-    {% for question in ql %}
+    {% for question in latest_question_list %}
         <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No polls are available.</p>
 {% endif %}
-</body>
-</html>
+<br/><hr/>
+<a href="/polls/addpoll/">Add new poll</a>
+</div>
+</div>
+{% include "footer.html" %}
