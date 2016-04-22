@@ -1,7 +1,7 @@
-{% include "head.html" %}
+{% include "polls/head.html" %}
 
 
-{% include "navbody.html" with app="polls" admin=user.is_superuser %}
+{% include "polls/navbody.html" with app="polls" admin=user.is_superuser %}
 
 
 <div class="row">
@@ -71,4 +71,4 @@ $(document).ready(function(){
 </script>
 
 
-{% include "footer.html" %}
+{% include "polls/footer.html" %}

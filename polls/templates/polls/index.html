@@ -1,6 +1,6 @@
-{% include "head.html" %}
+{% include "polls/head.html" %}
 
-{% include "navbody.html" with app="polls" admin=user.is_superuser %}
+{% include "polls/navbody.html" with app="polls" admin=user.is_superuser %}
 
 <div class="row">
         <div class="col-sm-12">
@@ -21,4 +21,4 @@
 <a href="/polls/addpoll/">Add new poll</a>
 </div>
 </div>
-{% include "footer.html" %}
+{% include "polls/footer.html" %}
