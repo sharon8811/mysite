@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'homepage.apps.HomepageConfig',
     'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
     'tweepytest.apps.TweepytestConfig',

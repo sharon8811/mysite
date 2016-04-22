@@ -1,0 +1,12 @@
+{% include "homepage/head.html" %}
+
+{% include "homepage/navbody.html" with app="home" admin=user.is_superuser %}
+
+
+<div class="row">
+    <div class="col-sm-12">
+    this is the homepage
+
+</div>
+</div>
+{% include "homepage/footer.html" %}
