@@ -70,7 +70,7 @@ def submit(request):
     if request.method == 'POST':
         form = SubmitArticle(request.POST)
         if form.is_valid():
-            newart = Article(name=request.POST['name'], writer=request.POST['writer'], short_text=request.POST['short_text'], text=request.POST['text'], pub_date=timezone.now(), views=0)
+            newart = Article(name=request.POST['name'], writer=request.POST['writer'], short_text=request.POST['short_text'], text=request.POST['text'], date=timezone.now(), views=0)
             newart.save()
             template_name = 'news/submit.html'
             context = {'user_form': form, 'err': '', 'suc': True}
