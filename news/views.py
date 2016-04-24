@@ -35,7 +35,7 @@ def index(request):
             # If page is out of range (e.g. 9999), deliver last page of results.
             news = npaginator.page(npaginator.num_pages)
 
-        return render(request, template_name,  {'news_list': news, 'author_page': False})
+        return render(request, template_name,  {'news_list': news, 'author_page': False, 'page': page})
 
 
 def article(request, article_id, page=None):
