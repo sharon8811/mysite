@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse
 from .forms import SubmitArticle
 from .models import Article, ArticleImages
+from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
