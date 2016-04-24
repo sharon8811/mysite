@@ -38,13 +38,13 @@ def index(request):
         return render(request, template_name,  {'news_list': news, 'author_page': False})
 
 
-def article(request, article_id):
+def article(request, article_id, page=None):
     template_name = 'news/article.html'
     arti = get_object_or_404(Article, pk=article_id)
     #image = ArticleImages.objects.get(article=arti.id)
     arti.views += 1
     arti.save()
-    context = {'article': arti, 'image': "none"}
+    context = {'article': arti, 'image': "none", 'page': page}
     return render(request, template_name, context)
 
 
