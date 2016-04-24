@@ -48,23 +48,31 @@
             </div>
         </div>
         <div class="col-sm-9">
+            {% if author_page %}
+                <h2>New from {{ author_name }}</h2>
+                <a href="/news/">Back to news page</a>
+            {% endif %}
 {% if news_list %}
             <table id="newstable" border='0' style="margin-left: 15px; width: 100%;">
     {% for new in news_list %}
                 <tr><td>
                 <div>
-                <h3 class="title"><a href="./article/{{ new.id }}/">{{ new.name }}</a></h3>
+                <h3 class="title"><a href="/news/article/{{ new.id }}/">{{ new.name }}</a></h3>
                 <!--</b></td></tr><tr><td><span style="font-size:15px;">-->
                 <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {{ new.date }}</p>
                 <p>{{ new.short_text |linebreaks }}</p>
-                <p class="text-muted">Presented by: <span class="glyphicon glyphicon-user"></span> <a href="./author/{{ new.writer }}/">{{ new.writer }}</a></p>
+                <p class="text-muted">Presented by: <span class="glyphicon glyphicon-user"></span> <a href="/news/author/{{ new.writer }}/">{{ new.writer }}</a></p>
                 </div>
                 <hr>
                 </td></tr>
     {% endfor %}
             </table>
 {% else %}
-            <p>No news are available.</p>
+            {% if author_page %}
+                <p>There is no such author.</p>
+            {% else %}
+                <p>No news are available.</p>
+            {% endif %}
 {% endif %}
 
 
