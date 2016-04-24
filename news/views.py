@@ -21,7 +21,7 @@ def index(request):
     else:
         template_name = 'news/index.html'
         news_list = Article.objects.order_by('-date')
-        npaginator = Paginator(news_list, 2)  # Show 25 contacts per page
+        npaginator = Paginator(news_list, 5)  # Show 25 contacts per page
 
         page = request.GET.get('page')
         try:
@@ -49,7 +49,7 @@ def article(request, article_id):
 def author(request, author_name):
     template_name = 'news/index.html'
     news_list = Article.objects.filter(writer=author_name).order_by('-date')
-    npaginator = Paginator(news_list, 2)  # Show 25 contacts per page
+    npaginator = Paginator(news_list,5)  # Show 25 contacts per page
 
     page = request.GET.get('page')
     try:
