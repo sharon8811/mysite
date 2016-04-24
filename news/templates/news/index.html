@@ -74,6 +74,22 @@
                 <p>No news are available.</p>
             {% endif %}
 {% endif %}
+            <br>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if news_list.has_previous %}
+                        <a href="?page={{ contacts.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ news_list.number }} of {{ news_list.paginator.num_pages }}.
+                    </span>
+
+                    {% if news_list.has_next %}
+                        <a href="?page={{ contacts.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
 
 
         </div>
