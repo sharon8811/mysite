@@ -1,5 +1,6 @@
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse
+from .forms import SubmitArticle
 from .models import Article, ArticleImages
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -62,3 +63,23 @@ def author(request, author_name):
         news = npaginator.page(npaginator.num_pages)
 
     return render(request, template_name, {'news_list': news, 'author_page': True, 'author_name': author_name})
+
+
+def submit(request):
+    if request.method == 'POST':
+        form = SubmitArticle(request.POST)
+        if form.is_valid():
+            newart = Article(name=request.POST['name'], writer=request.POST['writer'], short_text=request.POST['short_text'], text=request.POST['text'], pub_date=timezone.now(), views=0)
+            newart.save()
+            template_name = 'news/submit.html'
+            context = {'user_form': form, 'err': '', 'suc': True}
+            return render(request, template_name, context)
+        else:
+            template_name = 'news/submit.html'
+            context = {'user_form': form, 'err': 'Please fill in all the fields'}
+            return render(request, template_name, context)
+    else:
+        template_name = 'news/submit.html'
+        form = SubmitArticle()
+        context = {'user_form': form, 'err': ''}
+        return render(request, template_name, context)

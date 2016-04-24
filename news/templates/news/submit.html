@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.2.js"
+			  integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="
+			  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+
+    <div class="jumbotron" style="text-align: center;">
+        <H1>Python Django website</H1>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Python Django website</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home <span class="glyphicon glyphicon-home"></span></a></li>
+          <li><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
+          <li class="active"><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
+          <li><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
+          {% if admin %}
+            <li><a href="/admin/">admin</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+
+    {% if suc == True %}
+            <strong style="color: green">The article has been added succesfully</strong><br/><br/>
+            <br/><br/>
+            <a href="/news/">back to news page</a>
+    {% else %}
+            <table border="0">
+            <tr><td><h3>Submit new article</h3></td><td><br/>&nbsp;&nbsp;&nbsp;&nbsp;<strong><a href="/news/">or back to the news page</a></strong></td></tr>
+            </table>
+            <strong style="color: red">{{ err }}</strong><br/><br/>
+    <form role="form" method="POST" action="/news/submit/">
+        {% csrf_token %}
+        <div class="form-group col-lg-6">
+            <label>Title:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+            {{ user_form.name }}<strong style="color: red">{% if err != '' and user_form.name.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-lg-6">
+            <label>Author name:&nbsp;&nbsp;&nbsp;</label>
+            {{ user_form.writer }}<strong style="color: red">{% if err != '' and user_form.writer.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-lg-6">
+            <label style="vertical-align:top;">Short text:&nbsp;</label>
+            {{ user_form.short_text }}<strong style="color: red; vertical-align:top;">{% if err != '' and user_form.short_text.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+        </div>
+        <div class="clearfix"></div>
+        <div class="form-group col-lg-6">
+            <label style="vertical-align:top;">Article text:&nbsp;</label>
+            {{ user_form.text }}<strong style="color: red; vertical-align:top;">{% if err != '' and user_form.text.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+        </div>
+        <div class="form-group col-lg-8">
+            <input type="hidden" name="save" value="send">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    {% endif %}
+    </div>
+    </div>
+
+
+    </div>
+
+</body>
+</html>
