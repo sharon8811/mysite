@@ -57,7 +57,7 @@
 
 
 
-        <a href="{%if page is not None %}/news/?page={{ page }}{{% else %}}{% url 'news:index' %}{{% endif %}">Back to news page</a><br/><br/>
+        <a href="{% if page %}/news/?page={{ page }}{{% else %}}{% url 'news:index' %}{{% endif %}">Back to news page</a><br/><br/>
         </div>
         <div class="col-sm-2"></div>
         </div>
