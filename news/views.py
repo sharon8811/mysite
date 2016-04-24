@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 # Create your views here.
-def index(request):
+def index(request, page=None):
     if request.is_ajax():
         #return search
         if request.method == "POST":
@@ -46,7 +46,7 @@ def article(request, article_id):
     return render(request, template_name, context)
 
 
-def author(request, author_name):
+def author(request, author_name, page=None):
     template_name = 'news/index.html'
     news_list = Article.objects.filter(writer=author_name).order_by('-date')
     npaginator = Paginator(news_list, 2)  # Show 25 contacts per page
