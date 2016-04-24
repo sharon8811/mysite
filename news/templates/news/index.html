@@ -57,7 +57,7 @@
     {% for new in news_list %}
                 <tr><td>
                 <div>
-                <h3 class="title"><a href="/news/article/{{ new.id }}/">{{ new.name }}</a></h3>
+                <h3 class="title"><a href="/news/article/{{ new.id }}/{{ news_list.number }}/">{{ new.name }}</a></h3>
                 <!--</b></td></tr><tr><td><span style="font-size:15px;">-->
                 <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {{ new.date }}</p>
                 <p>{{ new.short_text |linebreaks }}</p>
