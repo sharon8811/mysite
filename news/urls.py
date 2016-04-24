@@ -6,5 +6,5 @@ app_name = "news"
 urlpatterns = [
     url(r'^$', views.index, name="index"),
     url(r'^article/([0-9]+)/$', views.article, name='article'),
-    url(r'^author/(-\w)+/$', views.author, name='author'),
+    url(r'^author/(-\w\s)+/$', views.author, name='author'),
 ]
