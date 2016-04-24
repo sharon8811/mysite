@@ -48,7 +48,7 @@ def article(request, article_id, page=None):
     return render(request, template_name, context)
 
 
-def author(request, author_name):
+def author(request, author_name, page_to_return=None):
     template_name = 'news/index.html'
     news_list = Article.objects.filter(writer=author_name).order_by('-date')
     npaginator = Paginator(news_list,5)  # Show 25 contacts per page
@@ -63,7 +63,7 @@ def author(request, author_name):
         # If page is out of range (e.g. 9999), deliver last page of results.
         news = npaginator.page(npaginator.num_pages)
 
-    return render(request, template_name, {'news_list': news, 'author_page': True, 'author_name': author_name})
+    return render(request, template_name, {'news_list': news, 'author_page': True, 'author_name': author_name, 'page': page_to_return})
 
 
 def submit(request):
