@@ -5,15 +5,22 @@ from fabric.colors import green, red
 
 def prepare():
     #local("./manage.py test polls")
-    local("git add -p && git commit")
+    #local("git add -p && git commit")
     local("git push")
+    run('ssh 13.80.16.72')
+    run('Sha30138')
+    run('git pull')
 
 
 def mysite():
 
-    env.hosts = ['13.80.16.72']
+    #env.hosts = ['13.80.16.72']
+    run('ssh 13.80.16.72')
+    run('Sha30138')
+    run('git pull')
+    print(red("DONE!"))
+    #env.use_ssh_config = True
 
-    env.use_ssh_config = True
 
 
 
