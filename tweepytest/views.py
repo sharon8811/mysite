@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-import tweepy
+#import tweepy
 import urllib3
 # Create your views here.
 

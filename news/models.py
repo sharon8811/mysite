@@ -16,4 +16,4 @@ class Article(models.Model):
 
 class ArticleImages(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='/news/media/')
+    image = models.TextField()
