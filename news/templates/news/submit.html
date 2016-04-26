@@ -11,6 +11,7 @@
 			  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" crossorigin="anonymous">
     <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+    {% load staticfiles %}
 </head>
 <body>
     <div class="container">
@@ -66,9 +67,9 @@
             {{ user_form.short_text }}<strong style="color: red; vertical-align:top;">{% if err != '' and user_form.short_text.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
         </div>
         <div class="clearfix"></div>
-        <div class="form-group col-lg-6">
-            <label style="vertical-align:top;">Article text:&nbsp;</label>
-            {{ user_form.text }}<strong style="color: red; vertical-align:top;">{% if err != '' and user_form.text.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+        <div class="form-group col-lg-12">
+            <label style="vertical-align:top;">Article text:&nbsp;</label><br>{{ user_form.media }}{{ user_form.text }}
+            <strong style="color: red; vertical-align:top;">{% if err != '' and user_form.text.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
         </div>
         <div class="form-group col-lg-8">
             <input type="hidden" name="save" value="send">

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
     'tweepytest.apps.TweepytestConfig',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -123,6 +125,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/home/sharon/mysite/static/'
 
 MEDIA_ROOT = '/home/sharon/mysite/news/media'
 MEDIA_URL = '/news/media/'
+
+CKEDITOR_UPLOAD_PATH = '/static/uploads/'
+
+CKEDITOR_CONFIGS = {
+'default': {
+'toolbar': 'full',
+'height': 300,
+'width': 1000,
+},
+}
