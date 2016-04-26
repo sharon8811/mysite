@@ -1,3 +1,6 @@
+import base64
+import cStringIO
+from PIL import Image
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse
 from .forms import SubmitArticle
@@ -46,7 +49,7 @@ def article(request, article_id, page=None):
     if len(images) > 0:
         imagenum = 1
         for image in images:
-            text = text.replace("{{ images.image" + str(imagenum) + " }}", '<img src="' + image.image + '" style="width:750px;">')
+            text = text.replace("{{ images.image" + str(imagenum) + " }}", '<img src="/news/image/' + str(image.id) + '/" style="width:750px;">')
             imagenum += 1
     arti.views += 1
     arti.save()
@@ -90,3 +93,23 @@ def submit(request):
         form = SubmitArticle()
         context = {'user_form': form, 'err': ''}
         return render(request, template_name, context)
+
+
+def image(request, image_id):
+    img = get_object_or_404(ArticleImages, pk=image_id)
+    _, imgstr = img.image.split(',')
+    pic = decode_base64(imgstr)
+    return HttpResponse(pic, content_type='image/png')
+
+
+def decode_base64(data):
+    """Decode base64, padding being optional.
+
+    :param data: Base64 data as an ASCII byte string
+    :returns: The decoded byte string.
+
+    """
+    missing_padding = 4 - len(data) % 4
+    if missing_padding:
+        data += b'='* missing_padding
+    return base64.decodestring(data)
