@@ -41,17 +41,23 @@ def index(request):
 def article(request, article_id, page=None):
     template_name = 'news/article.html'
     arti = get_object_or_404(Article, pk=article_id)
-    #image = ArticleImages.objects.get(article=arti.id)
+    images = ArticleImages.objects.filter(article=arti.id)
+    text = arti.text
+    if len(images) > 0:
+        imagenum = 1
+        for image in images:
+            text = text.replace("{{ images.image" + str(imagenum) + " }}", '<img src="' + image.image + '" style="width:750px;">')
+            imagenum += 1
     arti.views += 1
     arti.save()
-    context = {'article': arti, 'image': "none", 'page': page}
+    context = {'article': arti, 'image': "none", 'page': page, 'text': text}
     return render(request, template_name, context)
 
 
 def author(request, author_name, page_to_return=None):
     template_name = 'news/index.html'
     news_list = Article.objects.filter(writer=author_name).order_by('-date')
-    npaginator = Paginator(news_list,5)  # Show 25 contacts per page
+    npaginator = Paginator(news_list, 5)  # Show 5 per page
 
     page = request.GET.get('page')
     try:
