@@ -29,8 +29,8 @@
           <li><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
           <li class="active"><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
           <li><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
-          {% if admin %}
-            <li><a href="/admin/">admin</a></li>
+          {% if request.user.is_superuser %}
+            <li><a href="/admin/">admin <span class="glyphicon glyphicon-cog"></span></a></li>
           {% endif %}
         </ul>
       </div>

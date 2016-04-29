@@ -30,7 +30,7 @@
           <li class="active"><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
           <li><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
           {% if request.user.is_superuser %}
-            <li><a href="/admin/">admin</a></li>
+            <li><a href="/admin/">admin <span class="glyphicon glyphicon-cog"></span></a></li>
           {% endif %}
         </ul>
       </div>
@@ -65,8 +65,8 @@
                 <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {{ new.date }}</p>
                 <p>{{ new.short_text |linebreaks }}</p>
                 <p class="text-muted">Presented by: <span class="glyphicon glyphicon-user"></span> <a href="/news/author/{{ new.writer }}/{% if page %}{{ page }}/{% endif %}">{{ new.writer }}</a></p>
-                {% if request.user.is_superuser %}<a href="/news/article/edit/{{ new.id }}/">Edit Aritcle</a> ,
-                    <a href="/news/article/delete/{{ new.id }}/">Delete Aritcle</a>{% endif %}
+                {% if request.user.is_superuser %}<a href="/news/article/edit/{{ new.id }}/"><span class="glyphicon glyphicon-leaf"></span> Edit Aritcle</a> ,
+                    <a href="/news/article/delete/{{ new.id }}/"><span class="glyphicon glyphicon-trash"></span> Delete Aritcle</a>{% endif %}
                 </div>
                 <hr>
                 </td></tr>
