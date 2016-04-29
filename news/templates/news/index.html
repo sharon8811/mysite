@@ -52,6 +52,9 @@
                 <h2>New from {{ author_name }}</h2>
                 <a href="/news/">Back to news page</a>
             {% endif %}
+            {% if msg != "" %}
+                <strong style="color: green;">{{ msg }}</strong>
+            {% endif %}
 {% if news_list %}
             <table id="newstable" border='0' style="margin-left: 15px; width: 100%;">
     {% for new in news_list %}

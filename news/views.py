@@ -145,6 +145,7 @@ def editarticle(request, article_id):
             article_to_change.short_text = request.POST['short_text']
             article_to_change.text = request.POST['text']
             article_to_change.save()
+            return HttpResponseRedirect("/news/", {'msg': "Artice updated successfully"})
     else:
         template = "news/edit.html"
         article_to_edit = get_object_or_404(Article, pk=article_id)
