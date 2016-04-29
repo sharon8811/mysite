@@ -65,7 +65,8 @@
                 <p class="text-muted"><span class="glyphicon glyphicon-calendar"></span> {{ new.date }}</p>
                 <p>{{ new.short_text |linebreaks }}</p>
                 <p class="text-muted">Presented by: <span class="glyphicon glyphicon-user"></span> <a href="/news/author/{{ new.writer }}/{% if page %}{{ page }}/{% endif %}">{{ new.writer }}</a></p>
-                {% if request.user.is_superuser %}<a href="/news/article/edit/{{ new.id }}/">Edit Aritcle</a>{% endif %}
+                {% if request.user.is_superuser %}<a href="/news/article/edit/{{ new.id }}/">Edit Aritcle</a> ,
+                    <a href="/news/article/delete/{{ new.id }}/">Delete Aritcle</a>{% endif %}
                 </div>
                 <hr>
                 </td></tr>

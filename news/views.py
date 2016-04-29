@@ -191,3 +191,10 @@ def addimage(request, article_id):
     img.save()
 
     return HttpResponseRedirect("/news/article/edit/" + str(articletoaddimage.id) + "/", {'msg': "Image added successfully"})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def deletearticle(request, article_id):
+    articletodelete = get_object_or_404(Article, pk=article_id)
+    articletodelete.delete()
+    return HttpResponseRedirect("/news/", {'msg': "Artice deleted successfully"})
