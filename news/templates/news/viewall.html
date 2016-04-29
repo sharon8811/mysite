@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django site</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-2.2.2.js"
+			  integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="
+			  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css" crossorigin="anonymous">
+    <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+
+    <div class="jumbotron" style="text-align: center;">
+        <H1>Python Django website</H1>
+    </div>
+
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Python Django website</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home <span class="glyphicon glyphicon-home"></span></a></li>
+          <li><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
+          <li class="active"><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
+          <li><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
+          {% if admin %}
+            <li><a href="/admin/">admin</a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+
+
+
+
+        <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+        <h3 class="title">viewing all images in the db</h3>
+        {% for image in images %}
+            <strong>image id: {{ image.id }}</strong><br>
+            <img src="/news/image/{{ image.id }}/" style="width:750px;"><br>
+        {% endfor %}
+        <br/>
+
+
+
+
+        <a href="{% url 'news:index' %}">Back to news page</a><br/><br/>
+        </div>
+        <div class="col-sm-2"></div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+</body>
+</html>

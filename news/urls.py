@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^author/(?P<author_name>[-."\'\w\s]+)/(?P<page_to_return>[0-9]+)/$', views.author, name='author_page'),
     url(r'^submit/$', views.submit, name='submit'),
     url(r'^image/(?P<image_id>[0-9]+)/$', views.image, name='image'),
+    url(r'^image/viewall/$', views.imagesviewall, name='imagesviewall'),
 ]

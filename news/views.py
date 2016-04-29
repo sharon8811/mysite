@@ -1,5 +1,5 @@
 import base64
-import cStringIO
+import StringIO
 from PIL import Image
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse
@@ -81,6 +81,18 @@ def submit(request):
         if form.is_valid():
             newart = Article(name=request.POST['name'], writer=request.POST['writer'], short_text=request.POST['short_text'], text=request.POST['text'], date=timezone.now(), views=0)
             newart.save()
+            numberofimages = int(request.POST['articlefakeimage_set-TOTAL_FORMS'])
+            for number in range(numberofimages):
+                if 'articlefakeimage_set-' + str(number) + '-image' in request.FILES:
+                    newimagetosave = ArticleImages()
+                    newimagetosave.article = newart
+                    d = StringIO.StringIO()
+                    filee = request.FILES['articlefakeimage_set-' + str(number) + '-image']
+                    base64.encode(filee, d)
+                    s = d.getvalue()
+                    newimagetosave.image = "data:%s;base64,%s" % (filee.content_type, s)
+                    newimagetosave.save()
+
             template_name = 'news/submit.html'
             context = {'user_form': form, 'err': '', 'suc': True}
             return render(request, template_name, context)
@@ -113,3 +125,9 @@ def decode_base64(data):
     if missing_padding:
         data += b'='* missing_padding
     return base64.decodestring(data)
+
+
+def imagesviewall(request):
+    imgs = ArticleImages.objects.all()
+    template_name = 'news/viewall.html'
+    return render(request, template_name, {'images': imgs})

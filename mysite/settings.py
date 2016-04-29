@@ -127,15 +127,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/sharon/mysite/static/'
 
-MEDIA_ROOT = '/home/sharon/mysite/news/media'
-MEDIA_URL = '/news/media/'
+MEDIA_ROOT = '/home/sharon/mysite/static/uploads/images/'
+MEDIA_URL = '/static/uploads/images/'
 
 CKEDITOR_UPLOAD_PATH = '/static/uploads/'
 
 CKEDITOR_CONFIGS = {
-'default': {
-'toolbar': 'full',
-'height': 300,
-'width': 1000,
-},
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': 1000,
+    },
 }

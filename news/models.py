@@ -14,7 +14,20 @@ class Article(models.Model):
     text = RichTextField()
     views = models.IntegerField(default=0)
 
+    def __str__(self):
+        return "Article id:%s, name: %s" % (str(self.id), self.name)
 
 class ArticleImages(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     image = models.TextField()
+
+    def __str__(self):
+        return "Article image id: %s \n Image DATA: " % (str(self.article.id), self.image)
+
+
+class ArticleFakeImage(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to="/home/sharon/mysite/static/uploads/images/")
+
+    def __str__(self):
+        return "Article fake image id: %s Image path: %s" %(str(self.article.id), self.image.path)
