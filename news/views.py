@@ -1,13 +1,13 @@
 import base64
 import StringIO
-from PIL import Image
 from django.shortcuts import render, render_to_response, get_object_or_404
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .forms import SubmitArticle
 from .models import Article, ArticleImages
 from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.contrib.auth.decorators import user_passes_test
 
 
 # Create your views here.
@@ -127,7 +127,67 @@ def decode_base64(data):
     return base64.decodestring(data)
 
 
+@user_passes_test(lambda u: u.is_superuser)
 def imagesviewall(request):
     imgs = ArticleImages.objects.all()
     template_name = 'news/viewall.html'
     return render(request, template_name, {'images': imgs})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def editarticle(request, article_id):
+    if request.method == "POST":
+        form = SubmitArticle(request.POST)
+        if form.is_valid():
+            article_to_change = get_object_or_404(Article, article_id)
+            article_to_change.name = request.POST['name']
+            article_to_change.writer = request.POST['writer']
+            article_to_change.date = request.POST['date']
+            article_to_change.short_text = request.POST['short_text']
+            article_to_change.text = request.POST['text']
+            article_to_change.save()
+    else:
+        template = "news/edit.html"
+        article_to_edit = get_object_or_404(Article, pk=article_id)
+        article_images = ArticleImages.objects.filter(article=article_to_edit)
+        form = SubmitArticle(instance=article_to_edit)
+        return render(request, template, {'article': article_to_edit, 'images': article_images, 'user_form': form})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def deleteimage(request, image_id):
+    img = get_object_or_404(ArticleImages, pk=image_id)
+    article_id = img.article_id
+    img.delete()
+    return HttpResponseRedirect("/news/article/edit/" + str(article_id) + "/", {'msg': "Image deleted successfully"})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def replaceimage(request, image_id):
+    img = get_object_or_404(ArticleImages, pk=image_id)
+    article_id = img.article_id
+
+    d = StringIO.StringIO()
+    filee = request.FILES['replaceimage']
+    base64.encode(filee, d)
+    s = d.getvalue()
+    img.image = "data:%s;base64,%s" % (filee.content_type, s)
+    img.save()
+
+    return HttpResponseRedirect("/news/article/edit/" + str(article_id) + "/", {'msg': "Image updated successfully"})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def addimage(request, article_id):
+    articletoaddimage = get_object_or_404(Article, pk=article_id)
+    img = ArticleImages()
+    img.article = articletoaddimage
+
+    d = StringIO.StringIO()
+    filee = request.FILES['addimage']
+    base64.encode(filee, d)
+    s = d.getvalue()
+    img.image = "data:%s;base64,%s" % (filee.content_type, s)
+    img.save()
+
+    return HttpResponseRedirect("/news/article/edit/" + str(articletoaddimage.id) + "/", {'msg': "Image added successfully"})

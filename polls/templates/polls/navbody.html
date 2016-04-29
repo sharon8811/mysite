@@ -17,7 +17,7 @@
       <li {% if app == "polls" %} class="active"{% endif %}><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
       <li {% if app == "news" %} class="active"{% endif %}><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
       <li {% if app == "formapp" %} class="active"{% endif %}><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
-      {% if admin %}
+      {% if request.user.is_superuser %}
         <li><a href="/admin/">admin</a></li>
       {% endif %}
     </ul>
