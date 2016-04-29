@@ -17,6 +17,13 @@ class Question(models.Model):
     def __str__(self):
         return self.question_text
 
+    def sumvotes(self):
+        choices = Choice.objects.filter(question=self.id)
+        sumv = 0
+        for choice in choices:
+            sumv += choice.votes
+        return sumv
+
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now

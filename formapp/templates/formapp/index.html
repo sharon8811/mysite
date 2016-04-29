@@ -1,0 +1,34 @@
+{% include "formapp/head.html" %}
+
+{% include "formapp/navbody.html" with app="formapp" admin=user.is_superuser %}
+
+    <div class="row">
+        <div class="col-sm-12">
+
+
+<strong style="color: red">{{ err }}</strong><br/><br/>
+<form role="form" method="POST" action="/contact/">
+    {% csrf_token %}
+    <div class="form-group col-lg-6">
+        <label>Sender:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        {{ user_form.sender }}<strong style="color: red">{% if err != '' and user_form.sender.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-lg-6">
+        <label>Subject:&nbsp;&nbsp;&nbsp;</label>
+        {{ user_form.subject }}<strong style="color: red">{% if err != '' and user_form.subject.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group col-lg-6">
+        <label style="vertical-align:top;">Message:&nbsp;</label>{{ user_form.media }}
+        {{ user_form.message }}<strong style="color: red; vertical-align:top;">{% if err != '' and user_form.message.value == '' %}&nbsp;&nbsp;*Required{% endif %}</strong>
+    </div>
+    <div class="form-group col-lg-8">
+        <input type="hidden" name="save" value="send">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+
+</div>
+</div>
+{% include "formapp/footer.html" %}

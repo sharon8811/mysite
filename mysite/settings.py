@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
+    'formapp.apps.FormappConfig',
     'tweepytest.apps.TweepytestConfig',
     'ckeditor',
     'ckeditor_uploader',
@@ -139,3 +140,11 @@ CKEDITOR_CONFIGS = {
         'width': 1000,
     },
 }
+
+# emai server settings
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_HOST_USER = 'postmaster@365testdomain.com'
+EMAIL_HOST_PASSWORD = '70a6af9a3ed9393419d02e9c4e9d8b82'
+EMAIL_PORT = 587

@@ -14,9 +14,44 @@
 {% endfor %}
 </ul>
 
-<p>number of votes so far:{{ votesum }}</p>
-<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+<p>number of votes so far: {{ question.sumvotes }}</p>
+<canvas id="myChart" width="400" height="150"></canvas>
+<br><hr>
+<a href="{% url 'polls:detail' question.id %}">Back to poll vote</a> or <a href="{% url 'polls:index' %}">Back to polls page</a>
 
 </div>
 </div>
+
+<script>
+var ctx = document.getElementById("myChart");
+
+var myChart2 = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for choice in question.choice_set.all %}"{{ choice.choice_text }}"{% if not forloop.last %}, {% endif %}{% endfor %}],
+        datasets: [{
+            label: '# of Votes',
+            backgroundColor: "rgba(0, 0, 246, 0.3)",
+            borderColor: "rgba(0, 0, 0, 0.5)",
+            borderWidth: 1,
+            hoverBackgroundColor: "rgba(0, 0, 246, 0.7)",
+            hoverBorderColor: "rgba(0, 0, 0, 1)",
+            data: [{% for choice in question.choice_set.all %}{{ choice.votes }}{% if not forloop.last %}, {% endif %}{% endfor %}]
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true,
+                    Decimals: 0
+                }
+            }]
+        }
+    }
+});
+
+</script>
+
+
 {% include "polls/footer.html" %}

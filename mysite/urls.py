@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^polls/', include('polls.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^news/', include('news.urls')),
+    url(r'^contact/', include('formapp.urls')),
     url(r'^tweepy/', include('tweepytest.urls')),
 ]
 

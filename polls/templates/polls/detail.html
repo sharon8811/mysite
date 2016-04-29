@@ -4,8 +4,8 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <h3>{{ question.question_text }}</h3>
-    </div>
+        <br>
+        <h3>{{ question.question_text }}</h3><br>
 
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -19,5 +19,7 @@
 <input type="submit" class="btn btn-success" value="Vote" />
 </form>
 </td></tr></table>
+        <br><hr><a href="/polls/">Back to polls page</a> or <a href="/polls/{{ question.id }}/results/">Show poll results</a>
+    </div>
 </div>
 {% include "polls/footer.html" %}
