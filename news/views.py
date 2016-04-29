@@ -142,7 +142,6 @@ def editarticle(request, article_id):
             article_to_change = get_object_or_404(Article, pk=article_id)
             article_to_change.name = request.POST['name']
             article_to_change.writer = request.POST['writer']
-            article_to_change.date = request.POST['date']
             article_to_change.short_text = request.POST['short_text']
             article_to_change.text = request.POST['text']
             article_to_change.save()
