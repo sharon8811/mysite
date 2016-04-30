@@ -198,3 +198,9 @@ def deletearticle(request, article_id):
     articletodelete = get_object_or_404(Article, pk=article_id)
     articletodelete.delete()
     return HttpResponseRedirect("/news/", {'msg': "Artice deleted successfully"})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def adminshowall(request):
+    articles = Article.objects.all()
+
