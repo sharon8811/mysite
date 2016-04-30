@@ -5,6 +5,7 @@ app_name = "news"
 
 urlpatterns = [
     url(r'^$', views.index, name="index"),
+    url(r'^viewall/(?P<msg>\w*)$', views.adminshowall, name='adminviewall'),
     url(r'^article/([0-9]+)/$', views.article, name='article'),
     url(r'^article/(?P<article_id>[0-9]+)/(?P<page>[0-9]+)/$', views.article, name='article_pages'),
     url(r'article/edit/(?P<article_id>[0-9]+)/$', views.editarticle, name='edit_article'),

@@ -8,6 +8,7 @@ from django.utils import timezone
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import user_passes_test
+from django.core.urlresolvers import reverse
 
 
 # Create your views here.
@@ -197,10 +198,14 @@ def addimage(request, article_id):
 def deletearticle(request, article_id):
     articletodelete = get_object_or_404(Article, pk=article_id)
     articletodelete.delete()
-    return HttpResponseRedirect("/news/", {'msg': "Artice deleted successfully"})
+    if request.GET['back']:
+        return HttpResponseRedirect(request.GET['back'])
+    else:
+        return HttpResponseRedirect("/news/")
 
 
 @user_passes_test(lambda u: u.is_superuser)
-def adminshowall(request):
-    articles = Article.objects.all()
+def adminshowall(request, msg=None):
+    articles = Article.objects.all().order_by('-date')
+    return render(request, "news/adminviewallarticles.html", {'articles': articles, 'msg': msg})
 

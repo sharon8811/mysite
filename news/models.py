@@ -17,6 +17,13 @@ class Article(models.Model):
     def __str__(self):
         return "Article id:%s, name: %s" % (str(self.id), self.name)
 
+    def imgsum(self):
+        imgs = ArticleImages.objects.filter(article=self.id)
+        if imgs:
+            return len(imgs) + 1
+        else:
+            return 0
+
 class ArticleImages(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE)
     image = models.TextField()

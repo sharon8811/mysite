@@ -39,7 +39,11 @@
 
         <div class="row">
         <div class="col-sm-3">
-            <a href="/news/submit/">Submit an article</a><br/><hr/>
+            <a href="/news/submit/">Submit an article</a><br/>
+            {% if request.user.is_superuser %}
+                <a href="/news/viewall/">View & Manage all articles</a><br/>
+            {% endif %}
+            <hr/>
             <h3>Search</h3>
             {% csrf_token %}
             <input type="text" id="search" name="search"/> <label><span class="glyphicon glyphicon-search"></span></label>
