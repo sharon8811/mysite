@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
+import logging
+logger = logging.getLogger(__name__)
 
 
 # Create your views here.
@@ -21,6 +23,7 @@ def index(request):
             search_text = ''
         if search_text != '':
             news = Article.objects.filter(Q(name__icontains=search_text) | Q(writer__icontains=search_text)).order_by('-date')
+            logger.debug("search results: " + str(news.count()))
         else:
             news = ''
         return render_to_response('news/ajax_search.html', {'news': news})

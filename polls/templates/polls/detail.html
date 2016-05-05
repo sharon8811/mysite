@@ -19,7 +19,8 @@
 <input type="submit" class="btn btn-success" value="Vote" />
 </form>
 </td></tr></table>
-        <br><hr><a href="/polls/">Back to polls page</a> or <a href="/polls/{{ question.id }}/results/">Show poll results</a>
+        <br><hr><a href="/polls/">Back to polls page</a> , <a href="/polls/{{ question.id }}/results/">Show poll results</a>
+        {% if request.user.is_superuser %} , <a href="/polls/editpoll/{{ question.id }}/">Edit poll</a>{% endif %}
     </div>
 </div>
 {% include "polls/footer.html" %}

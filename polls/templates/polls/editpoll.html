@@ -1,0 +1,77 @@
+{% include "polls/head.html" %}
+
+{% include "polls/navbody.html" with app="polls" admin=user.is_superuser %}
+
+
+<script>
+
+    $(document).ready(function(){
+        $('input[type="button"]').click(function(){
+            if ($(this).val() == "Update order") {
+                var i = 0;
+                $("#choices > option").each(function() {
+                    $("#choice-" + this.value).val(i);
+                    i += 1;
+                    $("#editpoll").submit();
+                });
+            }
+            else
+            {
+                var $op = $('#choices option:selected'),
+                    $this = $(this);
+                if($op.length){
+                    ($this.val() == ' ▲ ') ?
+                        $op.first().prev().before($op) :
+                        $op.last().next().after($op);
+                    $('#choices').focus();
+                } else {
+                    alert("please choose option first");
+                }
+            }
+        });
+    });
+
+</script>
+<div class="row">
+    <div class="col-sm-12">
+        <br>
+        <h3>EDIT: {{ poll.question_text }}</h3><br>
+
+
+{% if message %}<p><strong>{{ message }}</strong></p>{% endif %}
+
+<table border="0" style="margin-left: 15px"><tr><td>
+<form id="editpoll" action="{% url 'polls:editpoll' poll.id %}" method="post">
+{% csrf_token %}
+<label>Poll Choices</label><br>
+<table border="0"><tr><td>
+<select id="choices" name="chices" size="{{ poll.choice_set.all.count }}" style="overflow:auto;" >
+{% for choice in choices %}
+    <option value="{{ choice.id }}">{{ choice.choice_text }}</option>
+{% endfor %}
+</select>
+{% for choice in choices %}
+    <input type="hidden" id="choice-{{ choice.id }}" name="choice-{{ choice.id }}" value="">
+{% endfor %}
+</td>
+<td>
+    <table border="0">
+        <tr><td>
+            <input type="button" class="btn btn-success" value=" ▲ "><br>
+        </td></tr>
+        <tr><td>
+            <input type="button" class="btn btn-success" value=" ▼ ">
+        </td></tr>
+    </table>
+
+</td></tr></table>
+<br/><br>
+<input type="button" class="btn btn-success" value="Update order" />
+</form>
+</td></tr></table>
+        <br><hr><a href="/polls/">Back to polls page</a> or <a href="/polls/{{ poll.id }}/results/">Show poll results</a>
+    </div>
+</div>
+
+
+{% include "polls/footer.html" %}

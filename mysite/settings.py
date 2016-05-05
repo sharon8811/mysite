@@ -149,3 +149,25 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_HOST_USER = 'postmaster@365testdomain.com'
 EMAIL_HOST_PASSWORD = '70a6af9a3ed9393419d02e9c4e9d8b82'
 EMAIL_PORT = 587
+
+
+# logging settings
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/home/sharon/mysite/server.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}

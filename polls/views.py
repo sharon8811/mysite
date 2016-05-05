@@ -6,6 +6,7 @@ from django.views import generic
 from .forms import QuestionAjaxForm
 from django.core.context_processors import csrf
 from django.utils import timezone
+from django.contrib.auth.decorators import user_passes_test
 
 # Create your views here.
 
@@ -99,3 +100,19 @@ def addpoll(request, object_id=False):
     # args['poll'] = poll
     #return render_to_response('polls/addpoll2.html', args)
     # return render(request, 'polls/addpoll.html', {'formset': formset})
+
+
+@user_passes_test(lambda u: u.is_superuser)
+def editpoll(request, poll):
+    poll_to_edit = get_object_or_404(Question.objects.order_by('order'), id=poll)
+    poll_chices_to_edit = Choice.objects.filter(question=poll_to_edit).order_by('order')
+    message = ""
+    if request.method == "POST":
+        for choice in poll_chices_to_edit:
+            choice.order = int(request.POST["choice-" + str(choice.id)])
+            choice.save()
+            message = "The order changed successfully"
+            poll_chices_to_edit = Choice.objects.filter(question=poll_to_edit).order_by('order')
+        #update poll
+    template = "polls/editpoll.html"
+    return render(request, template, {'poll': poll_to_edit, 'choices': poll_chices_to_edit, 'message': message})
