@@ -217,8 +217,7 @@ def adminshowall(request, msg=None):
     return render(request, "news/adminviewallarticles.html", {'articles': articles, 'msg': msg})
 
 
-def thumbnail_image(request, image_id):
-    max_thumbnail_size = 120
+def thumbnail_image(request, image_id, max_thumbnail_size=100):
     img = get_object_or_404(ArticleImages, pk=image_id)
     _, imgstr = img.image.split(',')
     image_thumb = Image.open(BytesIO(base64.b64decode(imgstr)))
