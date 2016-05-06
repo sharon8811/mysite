@@ -93,7 +93,7 @@
         <div class="clearfix"></div>
         <div class="form-group col-lg-12">
             {% for image in images %}
-                <p><strong>image {{ forloop.counter }}:</strong><br><img src="/news/thumbnail/{{ image.id }}/" style="width:100px;" onclick="dialogbox({{ image.id }});" onmouseover="this.style.cursor='hand'" onmouseout="this.style.cursor='default'"></p>
+                <p><strong>image {{ forloop.counter }}:</strong><br><img src="/news/thumbnail/{{ image.id }}/" onclick="dialogbox({{ image.id }});" onmouseover="this.style.cursor='hand'" onmouseout="this.style.cursor='default'"></p>
                 <a href='/news/article/edit/deleteimage/{{ image.id }}/'>Delete Image</a> , <a href='#' onclick="dialogboxreplace({{ image.id }});">Replace Image</a>
                 <hr>
             {% endfor %}
