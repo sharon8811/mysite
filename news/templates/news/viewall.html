@@ -46,7 +46,7 @@
         <h3 class="title">viewing all images in the db</h3>
         {% for image in images %}
             <strong>image id: {{ image.id }}</strong><br>
-            <img src="/news/image/{{ image.id }}/" style="width:750px;"><br>
+            <img src="/news/thumbnail/{{ image.id }}/"><br>
         {% endfor %}
         <br/>
 

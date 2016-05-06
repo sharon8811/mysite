@@ -1,5 +1,7 @@
 import base64
 import StringIO
+from io import BytesIO
+
 from django.shortcuts import render, render_to_response, get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import SubmitArticle
@@ -9,6 +11,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import user_passes_test
 from django.core.urlresolvers import reverse
+import cStringIO
+from PIL import Image
 import logging
 logger = logging.getLogger(__name__)
 
@@ -212,3 +216,23 @@ def adminshowall(request, msg=None):
     articles = Article.objects.all().order_by('-date')
     return render(request, "news/adminviewallarticles.html", {'articles': articles, 'msg': msg})
 
+
+def thumbnail_image(request, image_id):
+    max_thumbnail_size = 120
+    img = get_object_or_404(ArticleImages, pk=image_id)
+    _, imgstr = img.image.split(',')
+    image_thumb = Image.open(BytesIO(base64.b64decode(imgstr)))
+    (height, width) = image_thumb.size
+    if height > width:
+        rat = height/max_thumbnail_size
+        width /= rat
+        height = max_thumbnail_size
+    else:
+        rat = width / max_thumbnail_size
+        height /= rat
+        width = max_thumbnail_size
+    #strr = "hey " + height + width
+    thumb = image_thumb.resize((int(height), int(width)), Image.ANTIALIAS)
+    response = HttpResponse(content_type="image/jpeg")
+    thumb.save(response, "JPEG")
+    return response
