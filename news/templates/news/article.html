@@ -48,8 +48,8 @@
         <br/><span class="glyphicon glyphicon-user"></span> Presented by: {{ article.writer }}
         <br/><span class="glyphicon glyphicon-eye-open"></span> {{ article.views }} views.
         <br/>
-            {% if request.user.is_superuser %}<a href="/news/article/edit/{{ new.id }}/"><span class="glyphicon glyphicon-leaf"></span> Edit Aritcle</a> ,
-                    <a href="/news/article/delete/{{ new.id }}/"><span class="glyphicon glyphicon-trash"></span> Delete Aritcle</a>{% endif %}
+            {% if request.user.is_superuser %}<a href="/news/article/edit/{{ article.id }}/"><span class="glyphicon glyphicon-leaf"></span> Edit Aritcle</a> ,
+                    <a href="/news/article/delete/{{ article.id }}/"><span class="glyphicon glyphicon-trash"></span> Delete Aritcle</a>{% endif %}
         </p>
         <hr>
         <strong>{{ article.short_text |linebreaks }}</strong>
