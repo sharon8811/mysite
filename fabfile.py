@@ -8,7 +8,7 @@ def prepare():
     #local("git add -p && git commit")
     local("git push")
     run('ssh 13.80.16.72')
-    run('Sha30138')
+    run('fdgdfgdg3534535')
     run('git pull')
 
 
@@ -16,7 +16,7 @@ def mysite():
 
     #env.hosts = ['13.80.16.72']
     run('ssh 13.80.16.72')
-    run('Sha30138')
+    run('fdgdfgdg3534535')
     run('git pull')
     print(red("DONE!"))
     #env.use_ssh_config = True
