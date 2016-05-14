@@ -134,9 +134,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/sharon/mysite/static/'
+STATIC_ROOT = '/opt/myenv/static/'
 
-MEDIA_ROOT = '/home/sharon/mysite/static/uploads/images/'
+MEDIA_ROOT = '/opt/myenv/static/static/uploads/images/'
 MEDIA_URL = '/static/uploads/images/'
 
 CKEDITOR_UPLOAD_PATH = '/static/uploads/'
