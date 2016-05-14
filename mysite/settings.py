@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+DEPLOYMENT = os.environ.get('DEPLOYMENT')
+DBPASSWORD = os.environ.get('DBPASSWORD')
+
 
 # Application definition
 
@@ -84,8 +87,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mysite',
+        'USER': 'django',
+        'PASSWORD': 'Test',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
