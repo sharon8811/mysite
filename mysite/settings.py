@@ -151,11 +151,11 @@ CKEDITOR_CONFIGS = {
 
 # emai server settings
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mailgun.org'
-EMAIL_HOST_USER = 'postmaster@365testdomain.com'
-EMAIL_HOST_PASSWORD = '70a6af9a3ed9393419d02e9c4e9d8b82'
-EMAIL_PORT = 587
+EMAIL_USE_TLS = os.environ.get('USE_TLS', False)
+EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 25)
 
 
 # logging settings
