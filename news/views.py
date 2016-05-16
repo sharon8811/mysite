@@ -14,6 +14,8 @@ from django.core.urlresolvers import reverse
 import cStringIO
 from PIL import Image
 import logging
+from django.views.decorators.cache import cache_page
+
 logger = logging.getLogger(__name__)
 
 
@@ -115,6 +117,7 @@ def submit(request):
         return render(request, template_name, context)
 
 
+@cache_page(60 * 15)
 def image(request, image_id):
     img = get_object_or_404(ArticleImages, pk=image_id)
     _, imgstr = img.image.split(',')
@@ -217,6 +220,7 @@ def adminshowall(request, msg=None):
     return render(request, "news/adminviewallarticles.html", {'articles': articles, 'msg': msg})
 
 
+@cache_page(60 * 15)
 def thumbnail_image(request, image_id, max_thumbnail_size=100):
     img = get_object_or_404(ArticleImages, pk=image_id)
     _, imgstr = img.image.split(',')

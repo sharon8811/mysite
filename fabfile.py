@@ -45,7 +45,7 @@ def deploy():
         print(green("Pulling master from origin..."))
 
         run('git pull')
-        run('./scripts/set_env.sh')
+        run('source scripts/set_env.sh')
 
 
 
