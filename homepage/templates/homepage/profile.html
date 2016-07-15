@@ -1,0 +1,79 @@
+{% include "homepage/head.html" %}
+
+{% include "homepage/navbody.html" with app="home" admin=user.is_superuser %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/css/bootstrap-datepicker.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.1/js/bootstrap-datepicker.min.js"></script>
+
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Update User Profile <small>{{ user.last_name }} {{ user.first_name }}</small></h2>
+    </div>
+</div>
+<hr/>
+
+<div class="row">
+    <div class="col-sm-12">
+        {% if message %}
+        <div class="alert alert-{{ message_type }}">
+            <strong>{{ message_type }}!</strong> {{ message }}.
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-sm-12">
+    <form method="post" action="/news/profile/">
+        {% csrf_token %}
+        <table border="0">
+            <tr>
+                <td>{{ form.username.label_tag }}</td>
+                <td>{{ form.username }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.nickname.label_tag }}</td>
+                <td>{{ form.nickname }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.age.label_tag }}</td>
+                <td>{{ form.age }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.height.label_tag }}</td>
+                <td>{{ form.height }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.first_name.label_tag }}</td>
+                <td>{{ form.first_name }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.last_name.label_tag }}</td>
+                <td>{{ form.last_name }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.email.label_tag }}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>{{ form.email }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Update" class="btn btn-primary"></td>
+            </tr>
+        </table>
+
+    </form>
+
+<script>
+  $(function() {
+    $( ".datepicker" ).datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "1900:2012",
+      // You can put more options here.
+
+    });
+  });
+</script>
+
+    </div>
+</div>
+{% include "homepage/footer.html" %}

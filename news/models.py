@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 from django.utils import timezone
 from ckeditor.fields import RichTextField
 # Create your models here.
@@ -13,6 +14,7 @@ class Article(models.Model):
     short_text = models.TextField()
     text = RichTextField()
     views = models.IntegerField(default=0)
+    user = models.ForeignKey(User, null=True, blank=True)
 
     def __str__(self):
         return "Article id:%s, name: %s" % (str(self.id), self.name)

@@ -7,19 +7,57 @@
         <H1>Python Django website</H1>
     </div>
 
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Python Django website</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li {% if app == "home" %} class="active"{% endif %}><a href="/">Home <span class="glyphicon glyphicon-home"></span></a></li>
-      <li {% if app == "polls" %} class="active"{% endif %}><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
-      <li {% if app == "news" %} class="active"{% endif %}><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
-      <li {% if app == "formapp" %} class="active"{% endif %}><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
-      {% if request.user.is_superuser %}
-          <li><a href="/admin/">admin <span class="glyphicon glyphicon-cog"></span></a></li>
-      {% endif %}
-    </ul>
-  </div>
+
+<nav class="navbar navbar-inverse navbar-static-top custom-navbar" role="navigation">
+     <div class="container">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <div class="navbar-header">
+           <a class="navbar-brand" rel="home" href="/" title="HomePage">
+           Django WebSite
+           </a>
+        </div>
+        <!-- Non-collapsing right-side icons -->
+        <ul class="nav navbar-nav navbar-right">
+           <li>
+             <a href="/accounts/profile/" class="fa fa-cog"></a>
+           </li>
+           <li>
+             <a href="#" class="fa fa-home"></a>
+           </li>
+           <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hello {% if request.user.is_authenticated %}{{ request.user.username }}{% else %}Guest{% endif %} <b class="caret"></b></a>
+               <ul class="dropdown-menu">
+                   {% if request.user.is_authenticated %}
+                   <li><a href="/accounts/profile/">Profile</a></li>
+                   <li><a href="#">Settings</a></li>
+                   <li class="divider"></li>
+                   <li><a href="/logout/">Logout</a></li>
+                   {% else %}
+                   <li><a href="/login/">Login</a></li>
+                   <li><a href="#">Signup</a></li>
+                   {% endif %}
+               </ul>
+           </li>
+           <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+        </ul>
+        <!-- the collapsing menu -->
+        <div class="collapse navbar-collapse navbar-left"  id="navbar-collapse-1">
+           <ul class="nav navbar-nav">
+              <li {% if app == "home" %} class="active"{% endif %}><a href="/">Home <span class="glyphicon glyphicon-home"></span></a></li>
+              <li {% if app == "polls" %} class="active"{% endif %}><a href="/polls/">Polls <span class="glyphicon glyphicon-align-left"></span></a></li>
+              <li {% if app == "news" %} class="active"{% endif %}><a href="/news/">News <span class="glyphicon glyphicon-blackboard"></span></a></li>
+              <li {% if app == "formapp" %} class="active"{% endif %}><a href="/contact/">Contact us <span class="glyphicon glyphicon-phone-alt"></span></a></li>
+              {% if request.user.is_superuser %}
+              <li><a href="/admin/">admin <span class="glyphicon glyphicon-cog"></span></a></li>
+              {% endif %}
+           </ul>
+        </div>
+        <!--/.nav-collapse -->
+     </div>
+     <!--/.container -->
 </nav>

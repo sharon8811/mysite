@@ -18,9 +18,12 @@ from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf.urls.static import static
+from homepage.views import profile
 
 urlpatterns = [
+    url('^', include('django.contrib.auth.urls')),
     url(r'^$', include('homepage.urls')),
+    url(r'^accounts/profile/', profile),
     url(r'^polls/', include('polls.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
